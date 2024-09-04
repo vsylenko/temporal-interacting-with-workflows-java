@@ -1,27 +1,20 @@
 package asyncactivitycompletion;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Base64;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import io.temporal.activity.Activity;
-import io.temporal.failure.ApplicationFailure;
-import java.net.HttpURLConnection;
-import io.temporal.activity.ActivityExecutionContext;
-import io.temporal.client.ActivityCompletionClient;
-import io.temporal.client.WorkflowClient;
-import io.temporal.serviceclient.WorkflowServiceStubs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Base64;
+
 import asyncactivitycompletion.model.TranslationActivityInput;
 import asyncactivitycompletion.model.TranslationActivityOutput;
+import io.temporal.activity.Activity;
+import io.temporal.failure.ApplicationFailure;
 
 public class TranslationActivitiesImpl implements TranslationActivities {
 

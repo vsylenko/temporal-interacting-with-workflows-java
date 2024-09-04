@@ -18,6 +18,14 @@
     </properties>
 
     <dependencies>
+<dependency>
+    <groupId>io.temporal.learn</groupId>
+    <artifactId>translation-microservice</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <scope>system</scope>
+    <systemPath>${user.home}/.m2/repository/io/temporal/learn/translation-microservice/1.0.0-SNAPSHOT/translation-microservice-1.0.0-SNAPSHOT.jar</systemPath>
+</dependency>
+
 
         <dependency>
             <groupId>io.temporal</groupId>
@@ -28,7 +36,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.8</version>
+            <version>1.5.6</version>
         </dependency>
 
         <dependency>

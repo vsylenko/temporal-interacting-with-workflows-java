@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import asyncactivitycompletion.TranslationActivitiesImpl;
+import asyncactivitycompletion.TranslationWorkflow;
+import asyncactivitycompletion.TranslationWorkflowImpl;
+import asyncactivitycompletion.model.TranslationWorkflowInput;
+import asyncactivitycompletion.model.TranslationWorkflowOutput;
 import io.temporal.testing.TestWorkflowEnvironment;
 import io.temporal.testing.TestWorkflowExtension;
 import io.temporal.worker.Worker;
-import translationworkflow.model.TranslationActivityInput;
-import translationworkflow.model.TranslationActivityOutput;
-import translationworkflow.model.TranslationWorkflowInput;
-import translationworkflow.model.TranslationWorkflowOutput;
 
 public class TranslationWorkflowTest {
 

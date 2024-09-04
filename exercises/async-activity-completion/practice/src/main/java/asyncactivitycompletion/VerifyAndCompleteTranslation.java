@@ -1,17 +1,10 @@
 package asyncactivitycompletion;
 
-import java.util.Base64;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import io.temporal.client.ActivityCompletionClient;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
-import io.temporal.client.ActivityCompletionClient;
-
-import asyncactivitycompletion.model.TranslationActivityOutput;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class VerifyAndCompleteTranslation {
   public static void main(String[] args) throws ExecutionException, InterruptedException {

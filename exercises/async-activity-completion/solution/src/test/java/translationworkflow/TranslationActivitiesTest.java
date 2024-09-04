@@ -8,10 +8,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import asyncactivitycompletion.TranslationActivities;
+import asyncactivitycompletion.TranslationActivitiesImpl;
+import asyncactivitycompletion.model.TranslationActivityInput;
+import asyncactivitycompletion.model.TranslationActivityOutput;
 import io.temporal.failure.ActivityFailure;
 import io.temporal.testing.TestActivityEnvironment;
-import translationworkflow.model.TranslationActivityInput;
-import translationworkflow.model.TranslationActivityOutput;
 
 public class TranslationActivitiesTest {
 
