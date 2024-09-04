@@ -1,9 +1,15 @@
 package sendingsignalsexternal.orderpizza;
 
-import io.temporal.activity.ActivityOptions;
-import io.temporal.workflow.Workflow;
-import io.temporal.failure.ApplicationFailure;
+import java.time.Duration;
+import java.util.List;
 
+import org.slf4j.Logger;
+
+import io.temporal.activity.ActivityOptions;
+import io.temporal.failure.ApplicationFailure;
+import io.temporal.workflow.Workflow;
+import sendingsignalsexternal.exceptions.InvalidChargeAmountException;
+import sendingsignalsexternal.exceptions.OutOfServiceAreaException;
 import sendingsignalsexternal.model.Address;
 import sendingsignalsexternal.model.Bill;
 import sendingsignalsexternal.model.Customer;
@@ -11,13 +17,6 @@ import sendingsignalsexternal.model.Distance;
 import sendingsignalsexternal.model.OrderConfirmation;
 import sendingsignalsexternal.model.Pizza;
 import sendingsignalsexternal.model.PizzaOrder;
-import sendingsignalsexternal.exceptions.InvalidChargeAmountException;
-import sendingsignalsexternal.exceptions.OutOfServiceAreaException;
-
-import java.time.Duration;
-import java.util.List;
-
-import org.slf4j.Logger;
 
 public class PizzaWorkflowImpl implements PizzaWorkflow {
 
@@ -66,24 +65,27 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
 
     OrderConfirmation confirmation;
     
-    // TODO: PART B: Wrap the following code in an if statement that executes if the
-    // Signal was true
+    if (this.fulfilled) {
+      Bill bill = new Bill(customer.getCustomerID(), orderNumber, "Pizza", totalPrice);
 
-    Bill bill = new Bill(customer.getCustomerID(), orderNumber, "Pizza", totalPrice);
+      try {
+        confirmation = activities.sendBill(bill);
+        logger.info("Bill sent to customer {}", customer.getCustomerID());
+      } catch (InvalidChargeAmountException e) {
+        logger.error("Unable to bill customer");
+        throw Workflow.wrap(e);
+      }
+    } else {
+      confirmation = null;
+      logger.info("Order was not fulfilled. Not billing the customer.");
 
-    try {
-      confirmation = activities.sendBill(bill);
-    } catch (InvalidChargeAmountException e) {
-      logger.error("Unable to bill customer");
-      throw Workflow.wrap(e);
     }
 
     return confirmation;
-
   }
-
-  // TODO: PART A: Implement the Signal to set `fulfilled` to the boolean value 
-  // that is passed in the Signal
-
-
+  
+  @Override
+  public void fulfillOrderSignal(boolean bool) {
+    this.fulfilled = bool;
+  }
 }

@@ -1,20 +1,19 @@
 package sendingsignalsexternal;
 
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowOptions;
-import java.util.concurrent.CompletableFuture;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-
-import sendingsignalsexternal.model.PizzaOrder;
-import sendingsignalsexternal.model.Pizza;
-import sendingsignalsexternal.model.Customer;
-import sendingsignalsexternal.model.OrderConfirmation;
-import sendingsignalsexternal.model.Address;
-import sendingsignalsexternal.fulfillorder.FulfillOrderWorkflow;
-import sendingsignalsexternal.orderpizza.PizzaWorkflow;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import io.temporal.client.WorkflowClient;
+import io.temporal.client.WorkflowOptions;
+import io.temporal.serviceclient.WorkflowServiceStubs;
+import sendingsignalsexternal.fulfillorder.FulfillOrderWorkflow;
+import sendingsignalsexternal.model.Address;
+import sendingsignalsexternal.model.Customer;
+import sendingsignalsexternal.model.OrderConfirmation;
+import sendingsignalsexternal.model.Pizza;
+import sendingsignalsexternal.model.PizzaOrder;
+import sendingsignalsexternal.orderpizza.PizzaWorkflow;
 
 public class Starter {
   public static void main(String[] args) throws Exception {
@@ -50,7 +49,6 @@ public class Starter {
 
     CompletableFuture<String> fulfillOrderResult = WorkflowClient.execute(orderWorkflow::fulfillOrder, order,
         pizzaWorkflowID);
-
 
     System.out.printf("Workflow result: %s\n", orderConfirmation.get());
     System.exit(0);

@@ -1,17 +1,13 @@
 package sendingsignalsexternal.fulfillorder;
 
-import sendingsignalsexternal.model.PizzaOrder;
-import sendingsignalsexternal.orderpizza.PizzaWorkflow;
-import sendingsignalsexternal.Constants;
+import java.time.Duration;
+
+import org.slf4j.Logger;
 
 import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.Workflow;
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowOptions;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-
-import java.time.Duration;
-import org.slf4j.Logger;
+import sendingsignalsexternal.model.PizzaOrder;
+import sendingsignalsexternal.orderpizza.PizzaWorkflow;
 
 public class FulfillOrderWorkflowImpl implements FulfillOrderWorkflow {
 
@@ -23,16 +19,20 @@ public class FulfillOrderWorkflowImpl implements FulfillOrderWorkflow {
 
   public String fulfillOrder(PizzaOrder order, String workflowID) {
 
-    // TODO: PART C: Create the Workflow Stub for PizzaOrderWorkflow
+    // PART C: Create an external workflow stub
+    PizzaWorkflow workflow = Workflow.newExternalWorkflowStub(PizzaWorkflow.class, workflowID);
 
     try {
       activities.makePizzas(order);
       activities.deliverPizzas(order);
-      
-      // TODO: PART D: Signal the workflow that the order was fulfilled successfully
+
+      // PART D: Signal the workflow that the order was fulfilled successfully
+      workflow.fulfillOrderSignal(true);
       return "order fulfilled";
     } catch (Exception e) {
-      // TODO: PART D: Signal the workflow that the order failed to be fulfilled
+      // PART D: Signal the workflow that the order failed to be fulfilled
+
+      workflow.fulfillOrderSignal(false);
       return "order not fulfilled";
     }
 
