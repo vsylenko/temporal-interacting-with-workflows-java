@@ -1,19 +1,17 @@
 package sendingsignalsclient;
 
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowOptions;
-import java.util.concurrent.CompletableFuture;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-
-import sendingsignalsclient.model.PizzaOrder;
-import sendingsignalsclient.model.Pizza;
-import sendingsignalsclient.model.Customer;
-import sendingsignalsclient.model.OrderConfirmation;
-import sendingsignalsclient.model.Address;
-import sendingsignalsclient.orderpizza.PizzaWorkflow;
-
 import java.util.Arrays;
 import java.util.List;
+
+import io.temporal.client.WorkflowClient;
+import io.temporal.client.WorkflowOptions;
+import io.temporal.serviceclient.WorkflowServiceStubs;
+import sendingsignalsclient.model.Address;
+import sendingsignalsclient.model.Customer;
+import sendingsignalsclient.model.OrderConfirmation;
+import sendingsignalsclient.model.Pizza;
+import sendingsignalsclient.model.PizzaOrder;
+import sendingsignalsclient.orderpizza.PizzaWorkflow;
 
 public class Starter {
   public static void main(String[] args) throws Exception {
@@ -35,7 +33,7 @@ public class Starter {
     PizzaWorkflow pizzaWorkflow = client.newWorkflowStub(PizzaWorkflow.class, pizzaWorkflowOptions);
 
     OrderConfirmation orderConfirmation = pizzaWorkflow.orderPizza(order);
-    //CompletableFuture<OrderConfirmation> orderConfirmation = WorkflowClient.execute(pizzaWorkflow::orderPizza, order);
+    // CompletableFuture<OrderConfirmation> orderConfirmation = WorkflowClient.execute(pizzaWorkflow::orderPizza, order);
 
 
     System.out.printf("Workflow result: %s\n", orderConfirmation);

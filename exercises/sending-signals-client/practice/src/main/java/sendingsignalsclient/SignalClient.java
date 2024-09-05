@@ -12,10 +12,11 @@ public class SignalClient {
 
     WorkflowClient client = WorkflowClient.newInstance(service);
 
-    // TODO: PART A: Set Workflow ID
-    PizzaWorkflow workflow = client.newWorkflowStub(PizzaWorkflow.class, "CHANGE_ME");
+    // PART A: Set Workflow ID
+    PizzaWorkflow workflow = client.newWorkflowStub(PizzaWorkflow.class, "pizza-workflow-order-XD001");
 
-    // TODO: PART B: Call fulfillOrderSignal, passing `true`
+    // PART B: Call fulfillOrderSignal, passing `true`
+    workflow.fulfillOrderSignal(true);
 
     System.exit(0);
   }

@@ -48,7 +48,7 @@ Now that you have a stub on the Workflow you wish to Signal (`PizzaWorkflow`), w
 
 To run the Workflow:
 
-1. In all terminals, change directories to the Exercise 2 directory `sending-signals-external`.
+1. In all terminals, change directories to the Exercise 2 directory `sending-signals-client/practice`.
    1. If you're in the GitPod environment, you can run `ex2`.
 1. In one terminal, compile the code using `mvn clean compile`.
 1. In the same terminal, start the Worker by running `mvn exec:java -Dexec.mainClass="sendingsignalsclient.SendSignalClientWorker"`.

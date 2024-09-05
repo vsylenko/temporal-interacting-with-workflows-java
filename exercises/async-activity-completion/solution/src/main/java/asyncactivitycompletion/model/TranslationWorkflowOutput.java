@@ -23,4 +23,9 @@ public class TranslationWorkflowOutput {
   public String toString() {
     return this.helloMessage;
   }
+
+public Object getGoodbyeMessage() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getGoodbyeMessage'");
+}
 }
