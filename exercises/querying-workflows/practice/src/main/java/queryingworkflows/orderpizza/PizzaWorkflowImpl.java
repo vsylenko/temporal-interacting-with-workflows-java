@@ -1,9 +1,15 @@
 package queryingworkflows.orderpizza;
 
-import io.temporal.activity.ActivityOptions;
-import io.temporal.workflow.Workflow;
-import io.temporal.failure.ApplicationFailure;
+import java.time.Duration;
+import java.util.List;
 
+import org.slf4j.Logger;
+
+import io.temporal.activity.ActivityOptions;
+import io.temporal.failure.ApplicationFailure;
+import io.temporal.workflow.Workflow;
+import queryingworkflows.exceptions.InvalidChargeAmountException;
+import queryingworkflows.exceptions.OutOfServiceAreaException;
 import queryingworkflows.model.Address;
 import queryingworkflows.model.Bill;
 import queryingworkflows.model.Customer;
@@ -11,13 +17,6 @@ import queryingworkflows.model.Distance;
 import queryingworkflows.model.OrderConfirmation;
 import queryingworkflows.model.Pizza;
 import queryingworkflows.model.PizzaOrder;
-import queryingworkflows.exceptions.InvalidChargeAmountException;
-import queryingworkflows.exceptions.OutOfServiceAreaException;
-
-import java.time.Duration;
-import java.util.List;
-
-import org.slf4j.Logger;
 
 public class PizzaWorkflowImpl implements PizzaWorkflow {
 
@@ -33,7 +32,8 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
   @Override
   public OrderConfirmation orderPizza(PizzaOrder order) {
 
-    // TODO: PART A: Assign the value `Started` to `status`
+    // PART A: Assign the value `Started` to `status`
+    status = "Started";
     String orderNumber = order.getOrderNumber();
     Customer customer = order.getCustomer();
     List<Pizza> items = order.getItems();
@@ -63,7 +63,8 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
 
     logger.info("distance is {}", distance.getKilometers());
 
-    // TODO: PART A: Assign the value `Out for delivery` to `status`
+    // PART A: Assign the value `Out for delivery` to `status`
+    status = "Out for delivery";
 
     Workflow.await(() -> this.fulfilled);
 
@@ -75,7 +76,8 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
       try {
         confirmation = activities.sendBill(bill);
         logger.info("Bill sent to customer {}", customer.getCustomerID());
-        // TODO: PART A: Assign the value `Order complete` to `status`
+        // PART A: Assign the value `Order complete` to `status`
+        status = "Order complete";
       } catch (InvalidChargeAmountException e) {
         status = "Unable to bill customer";
         logger.error("Unable to bill customer");
@@ -94,6 +96,9 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
     this.fulfilled = bool;
   }
 
-  // TODO: PART A: Implement the `orderStatus` query method. It should return the
-  // value of `status`.
+  // PART A: Implement the `orderStatus` query method. It should return the
+  @Override
+  public String orderStatus() {
+    return this.status;
+  }
 }
