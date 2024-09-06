@@ -18,15 +18,6 @@
     </properties>
 
     <dependencies>
-<dependency>
-    <groupId>io.temporal.learn</groupId>
-    <artifactId>translation-microservice</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <scope>system</scope>
-    <systemPath>${user.home}/.m2/repository/io/temporal/learn/translation-microservice/1.0.0-SNAPSHOT/translation-microservice-1.0.0-SNAPSHOT.jar</systemPath>
-</dependency>
-
-
         <dependency>
             <groupId>io.temporal</groupId>
             <artifactId>temporal-sdk</artifactId>

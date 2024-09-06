@@ -9,9 +9,16 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>samples</module>
-        <module>exercises</module>
-        <module>utilities</module>
+        <module>samples/custom-search-attributes</module>
+        <module>exercises/async-activity-completion/practice</module>
+        <module>exercises/async-activity-completion/solution</module>
+        <module>exercises/querying-workflows/practice</module>
+        <module>exercises/querying-workflows/solution</module>
+        <module>exercises/sending-signals-client/practice</module>
+        <module>exercises/sending-signals-client/solution</module>
+        <module>exercises/sending-signals-external/practice</module>
+        <module>exercises/sending-signals-external/solution</module>
+        <module>utilities/microservice</module>
         <!-- Add more subdirectories as needed -->
     </modules>
 </project>
