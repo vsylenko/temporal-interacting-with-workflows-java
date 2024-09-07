@@ -1,12 +1,10 @@
 package sendingsignalsexternal.fulfillorder;
 
-import sendingsignalsexternal.model.PizzaOrder;
-import sendingsignalsexternal.model.Pizza;
-
-import io.temporal.activity.Activity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import sendingsignalsexternal.model.Pizza;
+import sendingsignalsexternal.model.PizzaOrder;
 
 public class FulfillOrderActivitiesImpl implements FulfillOrderActivities {
 

@@ -1,17 +1,13 @@
 package sendingsignalsexternal.fulfillorder;
 
-import sendingsignalsexternal.model.PizzaOrder;
-import sendingsignalsexternal.orderpizza.PizzaWorkflow;
-import sendingsignalsexternal.Constants;
+import java.time.Duration;
+
+import org.slf4j.Logger;
 
 import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.Workflow;
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowOptions;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-
-import java.time.Duration;
-import org.slf4j.Logger;
+import sendingsignalsexternal.model.PizzaOrder;
+import sendingsignalsexternal.orderpizza.PizzaWorkflow;
 
 public class FulfillOrderWorkflowImpl implements FulfillOrderWorkflow {
 
