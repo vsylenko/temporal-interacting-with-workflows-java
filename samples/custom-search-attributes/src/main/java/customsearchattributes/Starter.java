@@ -1,20 +1,17 @@
 package customsearchattributes;
 
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowOptions;
-import io.temporal.serviceclient.WorkflowServiceStubs;
-import io.temporal.common.SearchAttributes;
-
-import customsearchattributes.model.PizzaOrder;
-import customsearchattributes.model.Pizza;
-import customsearchattributes.model.Customer;
-import customsearchattributes.model.OrderConfirmation;
-import customsearchattributes.model.Address;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+
+import customsearchattributes.model.Address;
+import customsearchattributes.model.Customer;
+import customsearchattributes.model.OrderConfirmation;
+import customsearchattributes.model.Pizza;
+import customsearchattributes.model.PizzaOrder;
+import io.temporal.client.WorkflowClient;
+import io.temporal.client.WorkflowOptions;
+import io.temporal.common.SearchAttributes;
+import io.temporal.serviceclient.WorkflowServiceStubs;
 
 public class Starter {
   public static void main(String[] args) throws Exception {
@@ -43,8 +40,7 @@ public class Starter {
 
   private static PizzaOrder createPizzaOrder() {
     Customer customer = new Customer(8675309, "Lisa Anderson", "lisa@example.com", "555-555-0000");
-    Address address =
-        new Address("742 Evergreen Terrace", "Apartment 221B", "Albuquerque", "NM", "87101");
+    Address address = new Address("742 Evergreen Terrace", "Apartment 221B", "Albuquerque", "NM", "87101");
     Pizza pizza1 = new Pizza("Large, with mushrooms and onions", 1500);
     Pizza pizza2 = new Pizza("Small, with pepperoni", 1200);
     Pizza pizza3 = new Pizza("Medium, with extra cheese", 1300);
@@ -56,7 +52,7 @@ public class Starter {
     return order;
   }
 
-  private static SearchAttributes generateSearchAttributes(){
+  private static SearchAttributes generateSearchAttributes() {
     return SearchAttributes.newBuilder().set(Constants.IS_ORDER_FAILED, false).build();
   }
 }

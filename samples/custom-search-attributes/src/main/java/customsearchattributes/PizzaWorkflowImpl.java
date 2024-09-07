@@ -1,10 +1,12 @@
 package customsearchattributes;
 
-import io.temporal.activity.ActivityOptions;
-import io.temporal.workflow.Workflow;
-import io.temporal.failure.ApplicationFailure;
-import io.temporal.common.SearchAttributeKey;
+import java.time.Duration;
+import java.util.List;
 
+import org.slf4j.Logger;
+
+import customsearchattributes.exceptions.InvalidChargeAmountException;
+import customsearchattributes.exceptions.OutOfServiceAreaException;
 import customsearchattributes.model.Address;
 import customsearchattributes.model.Bill;
 import customsearchattributes.model.Customer;
@@ -12,23 +14,17 @@ import customsearchattributes.model.Distance;
 import customsearchattributes.model.OrderConfirmation;
 import customsearchattributes.model.Pizza;
 import customsearchattributes.model.PizzaOrder;
-import customsearchattributes.exceptions.InvalidChargeAmountException;
-import customsearchattributes.exceptions.OutOfServiceAreaException;
-
-import java.time.Duration;
-import java.util.List;
-
-import org.slf4j.Logger;
+import io.temporal.activity.ActivityOptions;
+import io.temporal.failure.ApplicationFailure;
+import io.temporal.workflow.Workflow;
 
 public class PizzaWorkflowImpl implements PizzaWorkflow {
 
   public static final Logger logger = Workflow.getLogger(PizzaWorkflowImpl.class);
 
-  ActivityOptions options =
-      ActivityOptions.newBuilder().setStartToCloseTimeout(Duration.ofSeconds(5)).build();
+  ActivityOptions options = ActivityOptions.newBuilder().setStartToCloseTimeout(Duration.ofSeconds(5)).build();
 
-  private final PizzaActivities activities =
-      Workflow.newActivityStub(PizzaActivities.class, options);
+  private final PizzaActivities activities = Workflow.newActivityStub(PizzaActivities.class, options);
 
   @Override
   public OrderConfirmation orderPizza(PizzaOrder order) {
@@ -38,8 +34,6 @@ public class PizzaWorkflowImpl implements PizzaWorkflow {
     List<Pizza> items = order.getItems();
     boolean isDelivery = order.isDelivery();
     Address address = order.getAddress();
-
-    
 
     logger.info("orderPizza Workflow Invoked");
 
