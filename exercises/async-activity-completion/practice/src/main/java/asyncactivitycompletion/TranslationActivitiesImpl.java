@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Base64;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import asyncactivitycompletion.model.TranslationActivityInput;
 import asyncactivitycompletion.model.TranslationActivityOutput;
 import io.temporal.activity.Activity;
+import io.temporal.activity.ActivityExecutionContext;
 import io.temporal.failure.ApplicationFailure;
 
 public class TranslationActivitiesImpl implements TranslationActivities {
@@ -25,15 +27,19 @@ public class TranslationActivitiesImpl implements TranslationActivities {
 
     logger.info("translateTerm Activity received input: {}", input);
 
-    // TODO PART A: Add the call to `getExecutionContext()`
+    // PART A: Add the call to `getExecutionContext()`
+    ActivityExecutionContext context = Activity.getExecutionContext();
 
-    // TODO: PART A: Get the task token using the context object defined in the previous step.
+    // PART A: Get the task token using the context object defined in the previous
+    // step.
     // The taskToken should be a byte[]
+    byte[] taskToken = context.getTaskToken();
 
-    // TODO: PART A: Uncomment me
-    //String encoded = new String(Base64.getEncoder().encode(taskToken));
+    // PART A: Uncomment me
+    String encoded = new String(Base64.getEncoder().encode(taskToken));
 
-    // TODO: PART A: Log the encoded task token
+    // PART A: Log the encoded task token
+    logger.info("TASK TOKEN: {}", encoded);
 
     String term = input.getTerm();
     String lang = input.getLanguageCode();
@@ -109,9 +115,10 @@ public class TranslationActivitiesImpl implements TranslationActivities {
 
     logger.info("Translation Service returned: {}", result.getTranslation());
 
-    // TODO: PART B: Use the `context` object from above to call `doNotCompleteOnReturn()`;
-    // This notifies Temporal that the Activity should not be completed on return and will be completed asynchronously.
-    
+    // PART B: Use the `context` object from above to call
+    context.doNotCompleteOnReturn();
+    // This notifies Temporal that the Activity should not be completed on return
+    // and will be completed asynchronously.
 
     // Since we have set doNotCompleteOnReturn(), the return value is ignored.
     return new TranslationActivityOutput("this will be ignored");
